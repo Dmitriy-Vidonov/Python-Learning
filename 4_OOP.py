@@ -35,17 +35,17 @@ swords = []
 
 for i in range(10):
     if random.randint(1,10) % 2 == 0: 
-        main_sword = Main_Weapon(random.randint(1, 10), # mw_type
-                            random.randint(1, 10),      # w_name
-                            random.randint(1, 5),       # w_weight
-                            random.randint(200, 600))   # w_damage
+        main_sword = Main_Weapon(random.randint(1, 10),    # mw_type
+                                 random.randint(1, 10),    # w_name
+                                 random.randint(1, 5),     # w_weight
+                                 random.randint(200, 600)) # w_damage
         swords.append(main_sword)
         
     else:
-        aux_sword = Aux_Weapon(random.randint(1, 10), # aux_w_ability
-                            random.randint(1, 10),    # w_name
-                            random.randint(1, 5),     # w_weight
-                            random.randint(200, 600)) # w_damage
+        aux_sword = Aux_Weapon(random.randint(1, 10),    # aux_w_ability
+                               random.randint(1, 10),    # w_name
+                               random.randint(1, 5),     # w_weight
+                               random.randint(200, 600)) # w_damage
         swords.append(aux_sword)
 
 for Weapon in swords:
