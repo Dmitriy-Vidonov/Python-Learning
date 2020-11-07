@@ -50,3 +50,16 @@ for i in range(10):
 
 for Weapon in swords:
     Weapon.foo(10)
+    
+#*********ВЫВОД**********
+
+Потомок Aux_Weapon. Урон = 555
+Потомок Main_Weapon. Урон = 888
+Потомок Main_Weapon. Урон = 888
+Потомок Aux_Weapon. Урон = 555
+Потомок Main_Weapon. Урон = 888
+Потомок Main_Weapon. Урон = 888
+Потомок Main_Weapon. Урон = 888
+Потомок Main_Weapon. Урон = 888
+Потомок Aux_Weapon. Урон = 555
+Потомок Aux_Weapon. Урон = 555
