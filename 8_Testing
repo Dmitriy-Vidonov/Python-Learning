@@ -73,7 +73,7 @@ def string_gen(x):
     return string
     
     
- # substring_found_test - запуск в командной строке линукса с ключом -v (расширенные комментарии)
+# substring_found_test - запуск в командной строке линукса с ключом -v (расширенные комментарии)
  
 from random import randint
 import unittest
