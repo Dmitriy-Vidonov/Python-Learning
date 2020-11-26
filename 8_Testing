@@ -1,0 +1,110 @@
+# string_found function
+
+def sub_string(s1: str, s2: str) -> str:
+
+    x = list(s1)
+    y = list(s2)
+
+    count = 0
+
+    if x != [] and y == []: return True
+
+    elif x == [] and y != []: return False
+        
+    elif x == [] and y == []: return True
+        
+
+    for i in range(len(s1)):
+        for j in range(len(s2)):
+            if y[j] == x[i] and (len(x) - i) >= (len(y) - count):
+                i += 1
+                count += 1
+            else:
+                break
+        if count == len(s2):
+            return True
+        else:
+            count = 0
+    if count != len(s2):
+        return False
+        
+  
+  
+  
+# string_found function alternative version
+
+def sub_string(s1: str, s2: str) -> str:
+    
+    x = list(s1)
+    y = list(s2)
+
+    equal = True
+    
+    for i in range(len(s1) - len(s2)):
+        equal = True
+        for j in range(len(s2)):  
+        
+            if y[j] != x[i+j]:
+                equal = False
+                break
+            
+        if equal == True:
+            return equal
+        
+    return False
+    
+    
+# string_generation function
+    
+from string import digits
+from string import ascii_letters
+from random import randint
+
+def string_gen(x):
+
+    massiv = []
+    for i in range (x):
+        if i % 3 == 0:
+            massiv.append(digits[randint(0, 9)])
+        else:
+            massiv.append(ascii_letters[randint(0, 51)])
+    string = ''.join(massiv)
+
+    return string
+    
+    
+ # substring_found_test - запуск в командной строке линукса с ключом -v (расширенные комментарии)
+ 
+from random import randint
+import unittest
+from substring_found import sub_string
+from string_generation import string_gen
+
+class Sub_String_Tests(unittest.TestCase):
+
+    def test_regression(self):
+        self.assertFalse(sub_string('asdhg4598dk', '98j'))
+
+    def test_random(self):
+        try:
+            for i in range(100):
+                x = string_gen(1000)
+                y = string_gen(100)
+                z = sub_string(x, y)
+                self.assertEqual(z, y in x)
+                self.assertTrue(False) # fail
+        except:
+            pass # success
+    
+    def test_max(self):
+        a = string_gen(1000000)
+        b = string_gen(10000)
+        self.assertFalse(sub_string(a, b))
+
+    def test_empty(self):
+        self.assertEqual(sub_string(string_gen(10), ''), True)
+        self.assertEqual(sub_string('', string_gen(10)), False)
+        self.assertEqual(sub_string('', ''), True)
+    
+if __name__ == '__main__':
+    unittest.main()
