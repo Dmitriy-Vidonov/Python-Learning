@@ -1,0 +1,55 @@
+# const.py - создание констант с содержанием пути к файлу и расширению файлов
+from collections import namedtuple
+
+Constants = namedtuple('Constants', ['path', 'file_extension'])
+const = Constants('/home/strider/Documents/Python/Work_with_files/', '.txt')
+
+******************************************************************************
+
+# create_files.py - создание 10 текстовых файлов с 3-мя строчками из рандомных цифр
+from random import randint
+from const import const
+
+try:
+    def generate_files(x):
+        for i in range(x):
+            file = open(const.path + str(i + 1) + const.file_extension, 'wt')
+            for i in range (3):
+                file.write(str(randint(1, 100)) + '\n')
+            file.close
+        return
+except Exception:
+    print('function create_files error')
+
+******************************************************************************
+
+# files_homework.py - основная программа, возвращающая сумму цифр из двух рандомных файлов
+# здесь же - проверка на то, чтобы в текстовиках не было более 3 цифр или не было строковых данных вместо числовых
+from random import randint
+from create_files import generate_files
+from const import const
+
+try:
+    #files_count = 10 # задаем количество файлов на генерацию
+   # generate_files(files_count) # создаем файлы
+
+    massiv = []
+    list_elements = 2 # задаем количество случайных чисел на вход
+    sum = 0
+
+    for i in range(2):
+      #  massiv.append(randint(1, files_count))
+        massiv.append(randint(1, 2))
+        fi = open(const.path + str(massiv[i]) + const.file_extension, 'rt')
+        print('Используем', massiv[i], const.file_extension)
+        s = fi.readline()
+        
+        for i in range(3):
+            print(s.strip())
+            sum += int(s.strip())
+            s = fi.readline()
+
+        fi.close
+    print("Summa =", sum)
+except Exception as ex:
+    print('Сбой в работе программы - ' + str(ex))
