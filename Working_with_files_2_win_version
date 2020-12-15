@@ -1,0 +1,158 @@
+# 2_home_work_files_ver_1_windows.py
+
+import os.path
+import sys, os
+import shutil
+
+PATH = 'C:/Users/vidonov/Desktop/Dev/Coding files/Working_with_files/' # занести возможно даже в константу
+WORK_DIR = 'dir_for_remove'
+
+try:
+    def files_dirs_list():
+
+        files_massiv = []
+        dirs_massiv = []
+
+        for path, dirs, files in os.walk(PATH + WORK_DIR):
+            if dirs != []:
+                for name in dirs:
+                  # print(os.path.join(name))
+                    dirs_massiv.append(os.path.join(name))
+
+            if files != []:
+                for name in files:
+                # print(os.path.join(path, name)) # расширенный путь в имени файла
+                  # print(os.path.join(name))
+                    files_massiv.append(os.path.join(name))
+        return dirs_massiv, files_massiv    
+       
+except Exception as ex:
+    print('Сбой в работе функции files_dirs_list()')
+
+print(files_dirs_list())
+
+#********************** ИЗВЛЕКАЕМ ДАННЫЕ ИЗ СПИСКОВ ФУНКЦИИ **********************
+
+massiv_3 = []
+massiv_4 = []
+
+massiv_3, massiv_4 = files_dirs_list() # так мы передаем списки из функции в два массива извне
+
+print('massiv_3 (dirs) =', massiv_3) # на вывод даем только нужный нам массив
+print('massiv_4 (files) =', massiv_4) # на вывод даем только нужный нам массив
+
+# ********************************************************
+
+print()
+print('***********************')
+print()
+
+PATH = 'C:/Users/vidonov/Desktop/Dev/Coding files/Working_with_files/'
+WORK_DIR = 'dir_for_remove'
+
+sub_dirs_flag = True
+inner_files_flag = True
+
+for path, dirs, files in os.walk(PATH + WORK_DIR):
+    if dirs != []:
+        sub_dirs_flag = False
+        for name in dirs:
+            print(os.path.join(name))
+    if files != []:
+        inner_files_flag = False
+        for name in files:
+            # print(os.path.join(path, name))
+            print(os.path.join(name))
+        
+    
+if sub_dirs_flag == True:
+    print('Подкаталогов нет')
+  #  вот эта вещь работает, но нам по идее нужно использовать работу предыдущей функции и поудалять файлы в цикле, а потом уже саму папку  
+  #  path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'dir_for_remove')
+  #  shutil.rmtree(path)
+    # надо в цикле удалить все файлы внутри каталога / в цикле получать из функции имена файлов и их затем удалять
+   # https://pythononline.ru/osnovy/kak-udalit-fayly-python
+else:
+    print('Есть подкаталоги')
+
+if inner_files_flag == True:
+    print('Вложенных файлов нет')
+else:
+    print('Есть вложенные файлы')
+   
+   
+#*****************************************
+
+# working_with_files_windows.py
+
+import os.path
+
+# PATH = '/home/dmitriy/Python/Work_with_files2/' # ubuntu home pc
+# PATH_2 = '/home/dmitriy/Python/Work_with_files2/test_dir_1/' # ubuntu home pc
+PATH = 'C:/Users/vidonov/Desktop/Dev/Coding files/Working_with_files/' # windows working pc
+PATH_2 = 'C:/Users/vidonov/Desktop/Dev/Coding files/Working_with_files/test_dir_1/' # windows working pc
+
+#******************** РАБОТА С ФАЙЛАМИ ********************#
+
+# проверка существования файла без его открытия
+# print(os.path.isfile('/bin/bash'))
+
+print(os.path.isfile(PATH + 'test_1.txt'))
+
+# размер файла в байтах
+print('Размер файла -', os.path.getsize(PATH + 'test_1.txt'), 'байт')
+
+# переименование файла простая версия
+# os.rename(PATH + 'for_rename.txt', PATH + 'after_rename.txt')
+
+# переименование файла с предварительной проверкой
+# if(os.path.isfile(PATH + 'for_rename.txt')):
+#     os.rename(PATH + 'for_rename.txt', PATH + 'after_rename_2.txt')
+
+# переименование для осуществления переноса - просто меняем адрес переименованного файла
+# if(os.path.isfile(PATH + 'for_rename.txt')):
+#     os.rename(PATH + 'for_rename.txt', PATH_2 + 'after_rename_3.txt')
+
+
+#******************** РАБОТА С НАЗВАНИЯМИ ФАЙЛОВ ********************#
+
+# полный путь к файлу
+print('Полный путь до файла -', os.path.abspath('test_1.txt'))
+
+# разбивка пути файла на head + tail - путь до файла и его имя
+print('Путь до файла со сплитом -', os.path.split('test_1.txt'))
+
+# получаем только само имя файла
+print('Чистое имя файла -', os.path.basename('1.txt'))
+
+
+#******************** РАБОТА С КАТАЛОГАМИ ********************#
+
+# проверяем, существует ли некоторый каталог
+print(os.path.isdir('test_dir_1'))
+
+# создание нового каталога с проверкой - не существует ли он уже
+# if not os.path.isdir('test_dir_new'):
+#     os.makedirs('test_dir_new')
+
+# переименование каталога
+# os.rename('test_dir_new', 'test_dir_renamed')
+
+# удаление пустого каталога (c непустым каталогом выдаст ошибку)
+# os.rmdir('dir_for_remove')
+
+# обход всех каталогов в текущем каталоге
+# на каждой итерации отдает - путь к текущему анализируемому каталогу, список каталогов в нем и список файлов в нем:
+
+for root, dirs, files in os.walk(PATH):
+    print(root) # путь к текущему анализируемому каталогу
+    print(dirs) # список всех каталогов внутри исходного каталога
+    print(files) # список всех файлов внутри исходного каталога
+
+
+   
+   
+   
+   
+   
+
