@@ -28,10 +28,14 @@ def files_dirs_list(WORK_DIR): # WORK_DIR - название рабочей па
             if files != []:
                 for name in files:
                     files_massiv.append(os.path.join(path, name)) # формируем список файлов
+        
+        return dirs_massiv, files_massiv
+    
     except Exception as ex:
         print('Сбор в работе функции files_dirs_list - ' + str(ex))
-        
-    return dirs_massiv, files_massiv
+        return None
+
+# print(files_dirs_list('dir_for_remove'))
 
 
 # *******************
@@ -55,6 +59,7 @@ def remove_dir(WORK_DIR): # WORK_DIR - имя папки на удаление
                 sub_dirs_flag = False
     except Exception as ex:
         print('Ошибка в цикле функции remove_dir() - ' + str(ex))
+        return None
 
     try:      
         if files != []:
@@ -68,8 +73,12 @@ def remove_dir(WORK_DIR): # WORK_DIR - имя папки на удаление
             os.rmdir(WORK_DIR) # удаляем уже пустую папку без файлов внутри
         else:
             print('Нельзя удалить - есть подкаталоги')
+
+        return
+
     except Exception as ex:
         print('Ошибка при проверке условий функции remove_dir() - ' + str(ex))
+        return None
 
-    return
 
+# remove_dir('remove_dir')
