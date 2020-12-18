@@ -30,6 +30,7 @@ def files_dirs_list(WORK_DIR): # WORK_DIR - название рабочей па
                     files_massiv.append(os.path.join(path, name)) # формируем список файлов
     except Exception as ex:
         print('Сбор в работе функции files_dirs_list - ' + str(ex))
+        
     return dirs_massiv, files_massiv
 
 
@@ -48,23 +49,27 @@ def remove_dir(WORK_DIR): # WORK_DIR - имя папки на удаление
     count = 0
 
     massiv_dirs, massiv_files = files_dirs_list(WORK_DIR) # заносим в массив данные функции files_dirs_list()
+    try:
+        for path, dirs, files in os.walk(const.path + WORK_DIR + '/'):
+            if dirs != []: # проверяем наличие суб-директорий     
+                sub_dirs_flag = False
+    except Exception as ex:
+        print('Ошибка в цикле функции remove_dir() - ' + str(ex))
 
-    for path, dirs, files in os.walk(const.path + WORK_DIR + '/'):
-        if dirs != []: # проверяем наличие суб-директорий     
-            sub_dirs_flag = False
-          
-    if files != []:
-        for name in files: 
-            count += 1 # подсчитываем число файлов
+    try:      
+        if files != []:
+            for name in files: 
+                count += 1 # подсчитываем число файлов
         
-    if sub_dirs_flag == True: # если подкаталогов нет, удаляем файлы
-        for i in range(count):
-            if os.path.isfile(massiv_files[i]):
-                os.remove(massiv_files[i]) # удаляем файлы по списку из массива
-        os.rmdir(WORK_DIR) # удаляем уже пустую папку без файлов внутри
-    else:
-        print("Нельзя удалить - есть подкаталоги")
-    return
+        if sub_dirs_flag == True: # если подкаталогов нет, удаляем файлы
+            for i in range(count):
+                if os.path.isfile(massiv_files[i]):
+                    os.remove(massiv_files[i]) # удаляем файлы по списку из массива
+            os.rmdir(WORK_DIR) # удаляем уже пустую папку без файлов внутри
+        else:
+            print('Нельзя удалить - есть подкаталоги')
+    except Exception as ex:
+        print('Ошибка при проверке условий функции remove_dir() - ' + str(ex))
 
-# remove_dir('dir_for_remove')
+    return
 
