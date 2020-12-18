@@ -7,6 +7,8 @@ import shutil
 PATH = 'C:/Users/vidonov/Desktop/Dev/Coding files/Working_with_files/' # занести возможно даже в константу
 WORK_DIR = 'dir_for_remove'
 
+# ВАЖНО - описания функций не смешиваютс с исполняемым кодом, здесь это оператор try. Оборачивать в него функцию неправильно
+
 try:
     def files_dirs_list():
 
