@@ -5,7 +5,9 @@ from collections import namedtuple
 Constants = namedtuple('Constants', ['path'])
 const = Constants('C:/Users/vidonov/Desktop/Dev/Coding files/Working_with_files/')
 
+
 # *******************
+
 
 # files_dirs_list.py
 
@@ -13,28 +15,26 @@ import os.path
 from const import const # подключаем константу с путем до рабочей папки, в которой
                         # расположена данная функция
 
-try:
-    def files_dirs_list(WORK_DIR): # WORK_DIR - название рабочей папки
+def files_dirs_list(WORK_DIR): # WORK_DIR - название рабочей папки
 
-        files_massiv = []
-        dirs_massiv = []
+    files_massiv = []
+    dirs_massiv = []
 
-        for path, dirs, files in os.walk(const.path + WORK_DIR):
-            if dirs != []:
-                for name in dirs:
-                    dirs_massiv.append(os.path.join(path, name)) # формируем список подкаталогов
+    for path, dirs, files in os.walk(const.path + WORK_DIR + '/'):
+        if dirs != []:
+            for name in dirs:
+                dirs_massiv.append(os.path.join(path, name)) # формируем список подкаталогов
 
-            if files != []:
-                for name in files:
-                    files_massiv.append(os.path.join(path, name)) # формируем список файлов
-        return dirs_massiv, files_massiv    
-       
-except Exception as ex:
-    print('Сбой в работе функции files_dirs_list()')
-
+        if files != []:
+            for name in files:
+                files_massiv.append(os.path.join(path, name)) # формируем список файлов
+    return dirs_massiv, files_massiv    
+    
 # print(files_dirs_list('dir_for_remove'))
 
+
 # *******************
+
 
 # remove_dir.py
 
