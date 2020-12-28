@@ -1,0 +1,27 @@
+# word_dunction.py
+
+from docx import Document
+
+def word_replacement(doc_name: str, w1: str, w2: str) -> str:
+    document = Document(doc_name)
+
+    Dict = {w1:w2}
+    try:
+        for i in Dict:
+            for p in document.paragraphs:
+                if p.text.find(i) >= 0:
+                    p.text = p.text.replace(i, Dict[i])
+        document.save(doc_name)
+        
+        return
+
+    except Exception as ex:
+        print('Сбой в работе функции word_replacement() - ' + str(ex))
+        return None
+        
+# example
+a = 'demo_2.docx'
+b = 'order'
+c = 'mix'
+word_replacement(a, b, c)
+
