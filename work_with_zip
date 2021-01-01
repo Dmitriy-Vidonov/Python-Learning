@@ -1,0 +1,23 @@
+# zip_function.py
+
+from zipfile import ZipFile
+import os.path
+
+def archivarius(arch_name: str, ext_name: str) -> str:
+
+# создание нового пустого архива 
+    try:
+        with ZipFile(arch_name + '.zip', 'w') as zip:
+            zip.close()
+
+        for root, dirs, files in os.walk('.'):
+            for name in files:
+                if '.' + ext_name in name: # добавляем файлы только с нужным расширением
+                    with ZipFile(arch_name + '.zip', 'a') as zip:
+                        zip.write(os.path.join(name))
+        return
+    except Exception as ex:
+        print('Сбой в работе функции archivarius() - ' + str(ex))
+
+# example
+archivarius('example', 'txt')
