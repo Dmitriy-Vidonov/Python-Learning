@@ -18,6 +18,7 @@ def archivarius(arch_name: str, ext_name: str) -> str:
         return
     except Exception as ex:
         print('Сбой в работе функции archivarius() - ' + str(ex))
+        return None
 
 # example
 archivarius('example', 'txt')
