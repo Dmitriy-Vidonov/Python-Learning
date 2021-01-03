@@ -13,7 +13,7 @@ from zipfile import ZipFile
 import os.path
 from const import const
 
-def archivarius(arch_name: str, ext_name: str) -> str:
+def archivarius(arch_name: str, ext_name: str) -> str: # ожидаем ввода исключительно строковых значений
 
 # создание нового пустого архива 
     try:
