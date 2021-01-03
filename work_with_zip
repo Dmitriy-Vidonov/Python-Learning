@@ -1,19 +1,29 @@
+# const.py
+
+from collections import namedtuple
+
+Constants = namedtuple('Constants', ['arch_extension']) # прописываем расширение для архива в константы
+                                                        # предполагается, что работаем чисто с zip, поэтому его и так изменить не сможем
+const = Constants('.zip')
+
+
 # zip_function.py
 
 from zipfile import ZipFile
 import os.path
+from const import const
 
 def archivarius(arch_name: str, ext_name: str) -> str:
 
 # создание нового пустого архива 
     try:
-        with ZipFile(arch_name + '.zip', 'w') as zip:
+        with ZipFile(arch_name + const.arch_extension, 'w') as zip:
             zip.close()
 
         for root, dirs, files in os.walk('.'):
             for name in files:
-                if '.' + ext_name in name: # добавляем файлы только с нужным расширением
-                    with ZipFile(arch_name + '.zip', 'a') as zip:
+                if ext_name in name: # добавляем файлы только с нужным расширением
+                    with ZipFile(arch_name + const.arch_extension, 'a') as zip:
                         zip.write(os.path.join(name))
         return
     except Exception as ex:
@@ -21,4 +31,4 @@ def archivarius(arch_name: str, ext_name: str) -> str:
         return None
 
 # example
-archivarius('example', 'txt')
+archivarius('example_py', '.py')
