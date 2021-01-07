@@ -1,7 +1,7 @@
 from PIL import Image
-from files_search import file_search
-from RGBA_to_RGB import rgba_to_rgb
-from sq_with_txt import img_square_with_txt
+from files_search import file_search  # импорт функции поиска файлов с нужным расширением
+from RGBA_to_RGB import rgba_to_rgb   # импорт функции преобразования файлов c RGBA в RGB
+from sq_with_txt import img_square_with_txt  # импорт функции рисования квадрата с текстом
 
 def img_convertion_square_txt(ext_1: str, ext_2: str, sq_size: int, sq_width: int, sq_color, 
                sq_text: str, txt_fnt_size: int, txt_align: str, txt_str_width: int):
@@ -25,7 +25,7 @@ def img_convertion_square_txt(ext_1: str, ext_2: str, sq_size: int, sq_width: in
 # 'Hello,\nWorld!', 40, 'left', 1) 
 
 
-# files_search.py
+# files_search.py - функция поиска файлов с нужным расширением
 
 import os.path
 from PIL import Image
@@ -45,7 +45,7 @@ def file_search(file_ext: str) -> str:
         return None
   
   
-# rgba_to_rgb
+# rgba_to_rgb - функция преобразования файлов c RGBA в RGB 
   
 from PIL import Image
 from files_search import file_search
@@ -65,7 +65,7 @@ def rgba_to_rgb(ext_for_check: str) -> str:
         return None
 
 
-# sq_with_txt.py
+# sq_with_txt.py - функция рисования квадрата с текстом
 
 from PIL import Image, ImageDraw, ImageFont
 
